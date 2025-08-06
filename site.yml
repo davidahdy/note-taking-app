@@ -1,0 +1,6 @@
+---
+- name: Deploy Note-Taking App
+  hosts: note_server
+  become: yes
+  roles:
+    - note_app
