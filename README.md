@@ -1,8 +1,82 @@
-# Note-Taking Flask App
+📓 Note-Taking Web App Deployment with Ansible
+📖 Overview
+This project demonstrates the deployment of a Python Flask Note-Taking Web Application on an AWS EC2 instance using Ansible automation.
+The application stores notes in an SQLite database, serves them via NGINX, and includes a backup strategy using an attached EBS volume.
 
-A simple Flask web app deployed with Ansible that allows users to submit and store notes in a SQLite database.
+The project is designed to be reusable and fully automated, enabling anyone to quickly provision and configure the application in a cloud environment.
 
-## Features
-- Web interface for submitting notes
-- Stores notes with timestamps
-- Deployable with Ansible
+🚀 Features
+Automated Deployment using Ansible roles and playbooks.
+
+Flask Web App for creating and viewing notes with timestamps.
+
+SQLite Database for lightweight local storage.
+
+NGINX as a reverse proxy for better performance.
+
+EBS Volume Backup mounted to /backup for storing database backups.
+
+Idempotent Setup – safe to re-run without breaking configurations.
+
+🛠️ Technologies Used
+Programming Language: Python 3 (Flask Framework)
+
+Configuration Management: Ansible
+
+Database: SQLite
+
+Web Server: NGINX
+
+Cloud Provider: AWS EC2 (Amazon Linux 2, t2.micro)
+
+Storage: AWS EBS volume for backups
+
+📂 Project Structure
+php
+Copy
+Edit
+note-taking-app/
+├── app.py               # Flask application source code
+├── templates/           # HTML templates for the web app
+├── static/               # Static files (CSS, JS)
+├── roles/
+│   └── note_taking_app/
+│       ├── tasks/        # Main automation tasks
+│       ├── templates/    # Jinja2 templates for configs
+│       ├── files/        # Static files for deployment
+│       └── meta/         # Role metadata
+├── inventory.ini         # Ansible inventory
+├── playbook.yml          # Main deployment playbook
+└── README.md             # Documentation
+⚙️ Prerequisites
+Before running the playbook, ensure you have:
+
+An AWS EC2 instance (Amazon Linux 2, t2.micro recommended).
+
+An attached EBS volume for backups.
+
+Ansible installed on your controller machine.
+
+Python 3 installed on the EC2 instance (Ansible will handle this if not present).
+
+Your SSH key added for EC2 access.
+
+📥 Installation & Deployment
+1️⃣ Clone the Repository
+
+git clone https://github.com/davidahdy/note-taking-app.git
+cd note-taking-app
+2️⃣ Update Inventory
+Edit inventory.ini and add your EC2 server’s IP address:
+
+[webserver]
+your.ec2.ip.address ansible_user=ec2-user ansible_ssh_private_key_file=~/.ssh/your-key.pem
+3️⃣ Run the Playbook
+bash
+Copy
+Edit
+ansible-playbook -i inventory.ini playbook.yml
+4️⃣ Access the Web App
+Open your browser and go to:
+
+http://your.ec2.ip.address
