@@ -1,5 +1,5 @@
 galaxy_info:
-  role_name: note_app
+  role_name: note-project
   author: davidahdy
   description: A role to deploy a simple Flask note-taking web app
   license: MIT
